@@ -1,4 +1,4 @@
-Django-photologue
+Django-photologue (Without unique title!)
 =================
 .. image:: https://img.shields.io/pypi/v/django-photologue.svg
     :target: https://pypi.python.org/pypi/django-photologue/
@@ -20,6 +20,8 @@ Django-photologue
 
 A powerful image management and gallery application for the Django web framework. Upload photos, group them into
 galleries, apply effects such as watermarks.
+
+The slug is generated as follows: title photo + timestamp photo + uuid.
 
 Take a closer look
 ------------------
