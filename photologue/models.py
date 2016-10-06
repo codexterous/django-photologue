@@ -1,5 +1,6 @@
 import os
 import random
+import uuid
 from datetime import datetime
 from inspect import isclass
 import logging
@@ -522,8 +523,7 @@ class ImageModel(models.Model):
 @python_2_unicode_compatible
 class Photo(ImageModel):
     title = models.CharField(_('title'),
-                             max_length=250,
-                             unique=True)
+                             max_length=250)
     slug = models.SlugField(_('slug'),
                             unique=True,
                             max_length=250,
@@ -550,8 +550,9 @@ class Photo(ImageModel):
         return self.title
 
     def save(self, *args, **kwargs):
-        if self.slug is None:
-            self.slug = slugify(self.title)
+        self.slug = slugify(self.title + 'at' +
+                                str(self.date_added.timestamp()) +
+                                str(uuid.uuid4()))
         super(Photo, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
