@@ -2,6 +2,7 @@ import os
 import random
 import uuid
 from datetime import datetime
+import time
 from inspect import isclass
 import logging
 from io import BytesIO
@@ -551,7 +552,7 @@ class Photo(ImageModel):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title + 'at' +
-                                str(self.date_added.timestamp()) +
+                                str(time.mktime(self.date_added.timetuple())) +
                                 str(uuid.uuid4()))
         super(Photo, self).save(*args, **kwargs)
 
